@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한동임 포트폴리오</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050508;
+    --surface: #0d0d18;
+    --card: #111124;
+    --border: rgba(130, 90, 255, 0.2);
+    --accent1: #7c3aed;
+    --accent2: #db2777;
+    --accent3: #06b6d4;
+    --glow1: rgba(124, 58, 237, 0.4);
+    --glow2: rgba(219, 39, 119, 0.4);
+    --text: #f0f0ff;
+    --text-muted: #8888aa;
+    --grid-line: rgba(124, 58, 237, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── GRID BG ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(5,5,8,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .orb1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--glow1), transparent 70%);
+    top: -100px; left: -100px;
+  }
+
+  .orb2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--glow2), transparent 70%);
+    bottom: -80px; right: -80px;
+    animation-delay: -4s;
+  }
+
+  .orb3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(6,182,212,0.3), transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -2s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--accent3);
+    background: rgba(6,182,212,0.1);
+    border: 1px solid rgba(6,182,212,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .hero-name span {
+    display: block;
+    background: linear-gradient(135deg, #fff 30%, var(--accent1) 70%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    margin-top: 1rem;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    color: white;
+    border: none;
+    box-shadow: 0 0 30px var(--glow1);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px var(--glow1);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(124,58,237,0.1);
+    border-color: var(--accent1);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 3rem;
+  }
+
+  .section-title span {
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── PROFILE ── */
+  #profile .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .info-card:hover {
+    border-color: var(--accent1);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.15);
+  }
+
+  .info-card:hover::before { opacity: 1; }
+
+  .info-card h3 {
+    font-size: 0.7rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 1rem;
+  }
+
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-purple {
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    color: #a78bfa;
+  }
+
+  .badge-pink {
+    background: rgba(219,39,119,0.15);
+    border: 1px solid rgba(219,39,119,0.3);
+    color: #f472b6;
+  }
+
+  .badge-cyan {
+    background: rgba(6,182,212,0.15);
+    border: 1px solid rgba(6,182,212,0.3);
+    color: #67e8f9;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--grid-line);
+    font-size: 0.9rem;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-row .label { color: var(--text-muted); font-size: 0.82rem; }
+  .info-row .value { font-weight: 500; font-size: 0.82rem; color: var(--text); }
+
+  /* ── INTELLIGENCE ── */
+  #intelligence .intel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .intel-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .intel-card.featured {
+    border-color: var(--accent1);
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), var(--card));
+  }
+
+  .intel-card.featured2 {
+    border-color: var(--accent2);
+    background: linear-gradient(135deg, rgba(219,39,119,0.1), var(--card));
+  }
+
+  .intel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.1);
+  }
+
+  .intel-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .intel-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .intel-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .intel-card .jobs {
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--accent3);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .intel-size-indicator {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent1);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--glow1); }
+    50% { box-shadow: 0 0 0 8px transparent; }
+  }
+
+  /* ── PROJECTS ── */
+  #projects .project-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .project-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent1), var(--accent2), transparent);
+  }
+
+  .project-item {
+    position: relative;
+    margin-bottom: 3rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .project-item::before {
+    content: '';
+    position: absolute;
+    left: -2.45rem;
+    top: 2rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--accent1);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px var(--glow1);
+  }
+
+  .project-item:hover {
+    border-color: var(--accent1);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.1);
+  }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .project-category {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--accent3);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  /* ── COURSES ── */
+  #courses .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .course-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s;
+  }
+
+  .course-item:hover {
+    border-color: var(--accent1);
+    background: rgba(124,58,237,0.05);
+    transform: translateX(4px);
+  }
+
+  .course-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent1);
+    min-width: 24px;
+  }
+
+  /* ── SWOT ── */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .swot-card {
+    border-radius: 16px;
+    padding: 1.8rem;
+    border: 1px solid;
+  }
+
+  .swot-s { background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.3); }
+  .swot-w { background: rgba(219,39,119,0.08); border-color: rgba(219,39,119,0.3); }
+  .swot-o { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.3); }
+  .swot-t { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.3); }
+
+  .swot-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .swot-s .swot-label { color: #a78bfa; }
+  .swot-w .swot-label { color: #f472b6; }
+  .swot-o .swot-label { color: #67e8f9; }
+  .swot-t .swot-label { color: #fbbf24; }
+
+  .swot-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .swot-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .swot-card ul li {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .swot-card ul li::before {
+    content: '▸';
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .swot-s ul li::before { color: #a78bfa; }
+  .swot-w ul li::before { color: #f472b6; }
+  .swot-o ul li::before { color: #67e8f9; }
+  .swot-t ul li::before { color: #fbbf24; }
+
+  /* ── VISION ── */
+  #vision {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vision-inner {
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(219,39,119,0.1));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vision-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(124,58,237,0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .vision-quote {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .vision-quote span {
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── AWARDS ── */
+  .awards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .award-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    transition: all 0.3s;
+  }
+
+  .award-item:hover {
+    border-color: var(--accent2);
+    transform: translateX(8px);
+  }
+
+  .award-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .award-info { flex: 1; }
+
+  .award-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .award-org {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .award-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  footer .footer-name {
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  footer p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 2px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    z-index: 200;
+    transition: width 0.1s;
+  }
+
+  /* ── MOBILE MENU ── */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: rgba(5,5,8,0.97);
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.open { display: flex; }
+
+    #profile .profile-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .swot-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intel-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .vision-inner {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .course-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .award-item {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: 1rem; }
+    .container { padding: 0 1.2rem; }
+    section { padding: 4rem 0; }
+
+    .course-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .project-timeline { padding-left: 1.5rem; }
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HAN · D · I</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#profile">프로필</a></li>
+    <li><a href="#intelligence">다중지능</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#courses">교과활동</a></li>
+    <li><a href="#swot">SWOT</a></li>
+    <li><a href="#vision">비전</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Cybersecurity · IoT · Digital Forensics</div>
+    <h1 class="hero-name">
+      <span>한동임</span>
+    </h1>
+    <p class="hero-subtitle">보안 솔루션 개발자 · 백석대학교</p>
+    <div class="hero-cta">
+      <a href="#profile" class="btn btn-primary">포트폴리오 보기</a>
+      <a href="#vision" class="btn btn-ghost">나의 비전 →</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="container">
+    <p class="section-label reveal">About Me</p>
+    <h2 class="section-title reveal">나는 <span>어떤 사람</span>인가?</h2>
+
+    <div class="profile-grid">
+      <div class="info-card reveal">
+        <h3>학력 · 병역</h3>
+        <div class="info-row">
+          <span class="label">고등학교</span>
+          <span class="value">백영고등학교 (2018.03 ~ 2021.01)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">대학교</span>
+          <span class="value">백석대학교 (2021.03 ~ 재학중)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">병역</span>
+          <span class="value">해병대 병장만기 전역 (2022.11.23)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">기수</span>
+          <span class="value">兵 1270期</span>
+        </div>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>인턴 · 논문</h3>
+        <div class="info-row">
+          <span class="label">해외 일경험</span>
+          <span class="value">일본 G&G 서비스 (2025.06~08)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">논문 (KCI)</span>
+          <span class="value">펌웨어 퍼징 이벤트 데이터 레코딩 (2025.02)</span>
+        </div>
+        <div class="badge-list" style="margin-top:1.2rem;">
+          <span class="badge badge-purple">IoT 보안</span>
+          <span class="badge badge-pink">디지털 포렌식</span>
+          <span class="badge badge-cyan">펌웨어 분석</span>
+          <span class="badge badge-purple">사이버보안</span>
+          <span class="badge badge-cyan">Python</span>
+          <span class="badge badge-pink">KCI 논문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" style="padding-top:0;">
+  <div class="container">
+    <p class="section-label reveal">Achievements</p>
+    <h2 class="section-title reveal">수상 및 <span>대외활동</span></h2>
+
+    <div class="awards-list">
+      <div class="award-item reveal">
+        <div class="award-icon">🌏</div>
+        <div class="award-info">
+          <div class="award-title">청소년 해외 자원봉사 — 캄보디아</div>
+          <div class="award-org">7박 8일 봉사활동</div>
+        </div>
+        <div class="award-date">–</div>
+      </div>
+      <div class="award-item reveal">
+        <div class="award-icon">🏆</div>
+        <div class="award-info">
+          <div class="award-title">창업 발명 공모전 단체상</div>
+          <div class="award-org">공모전 수상</div>
+        </div>
+        <div class="award-date">2024.06</div>
+      </div>
+      <div class="award-item reveal">
+        <div class="award-icon">🥇</div>
+        <div class="award-info">
+          <div class="award-title">제7회 부채널 정보분석 경진대회 KISTI 원장상</div>
+          <div class="award-org">KISTI 주관</div>
+        </div>
+        <div class="award-date">2024.07</div>
+      </div>
+      <div class="award-item reveal">
+        <div class="award-icon">📜</div>
+        <div class="award-info">
+          <div class="award-title">ICT 융합 보안크루 1기 수료증</div>
+          <div class="award-org">KISIA</div>
+        </div>
+        <div class="award-date">2024.11</div>
+      </div>
+      <div class="award-item reveal">
+        <div class="award-icon">⭐</div>
+        <div class="award-info">
+          <div class="award-title">ICT 융합 보안크루 1기 우수크루상</div>
+          <div class="award-org">KISIA 주관</div>
+        </div>
+        <div class="award-date">2024.11</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- INTELLIGENCE -->
+<section id="intelligence">
+  <div class="container">
+    <p class="section-label reveal">Multiple Intelligence</p>
+    <h2 class="section-title reveal">다중지능 <span>검사 결과</span></h2>
+
+    <div class="intel-grid">
+      <div class="intel-card featured reveal">
+        <div class="intel-size-indicator"></div>
+        <div class="intel-icon">🧮</div>
+        <h3>논리-수학 지능</h3>
+        <p>수리적으로 문제를 잘 해결할 수 있고, 추론을 잘하는 능력</p>
+        <div class="jobs">엔지니어 · 프로그래머 · 과학자</div>
+      </div>
+      <div class="intel-card featured2 reveal">
+        <div class="intel-size-indicator" style="background: var(--accent2); box-shadow: 0 0 0 0 var(--glow2);"></div>
+        <div class="intel-icon">🗺️</div>
+        <h3>공간 지능</h3>
+        <p>사물을 그림으로 표현하고 머릿속으로 그림을 그리며 상상할 수 있는 능력</p>
+        <div class="jobs" style="color: #f472b6;">디자이너 · 엔지니어 · 건축가</div>
+      </div>
+      <div class="intel-card reveal">
+        <div class="intel-icon">🤝</div>
+        <h3>인간친화 지능</h3>
+        <p>타인의 감정과 행동을 파악하고 다른 사람들과 효과적으로 소통하는 능력</p>
+        <div class="jobs">사회학자 · 정치가 · 교육자</div>
+      </div>
+      <div class="intel-card reveal">
+        <div class="intel-icon">🔍</div>
+        <h3>자기성찰 지능</h3>
+        <p>자신의 감정·동기·목표를 이해하고 자기 주도적으로 성장하는 능력</p>
+        <div class="jobs">철학자 · 심리학자 · 작가</div>
+      </div>
+      <div class="intel-card reveal">
+        <div class="intel-icon">🎵</div>
+        <h3>음악 지능</h3>
+        <p>음악적 패턴을 인식하고 리듬·음조·멜로디에 민감하게 반응하는 능력</p>
+        <div class="jobs">음악가 · 작곡가 · 지휘자</div>
+      </div>
+      <div class="intel-card reveal">
+        <div class="intel-icon">📖</div>
+        <h3>언어 지능</h3>
+        <p>언어를 효과적으로 사용하고 글쓰기·읽기·말하기에 능숙한 능력</p>
+        <div class="jobs">작가 · 저널리스트 · 변호사</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label reveal">Projects & Activities</p>
+    <h2 class="section-title reveal">프로젝트 및 <span>활동</span></h2>
+
+    <div class="project-timeline">
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <div class="project-category">IoT Security Programming</div>
+            <div class="project-title">IoT 보안 — 침입 감지 이메일 알림 시스템</div>
+          </div>
+        </div>
+        <p class="project-desc">
+          Raspberry Pi + PIR 센서 + 카메라 모듈을 연동하여 침입자를 감지하면 자동으로 영상을 촬영하고 SMTP 서버를 통해 이메일로 알림을 전송하는 보안 프로그램을 개발했습니다. MIMEBase 객체로 파일을 Base64 인코딩하여 첨부 파일로 전송하는 방식으로 구현하였습니다.
+        </p>
+        <div class="tech-stack">
+          <span class="badge badge-cyan">Python</span>
+          <span class="badge badge-purple">Raspberry Pi</span>
+          <span class="badge badge-pink">PIR Sensor</span>
+          <span class="badge badge-cyan">SMTP</span>
+          <span class="badge badge-purple">MIME</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <div class="project-category">Study Group · 소모임</div>
+            <div class="project-title">프로그래밍 스터디 그룹 운영</div>
+          </div>
+        </div>
+        <p class="project-desc">
+          Wi-Fi 연결 코드 수정 등 실전 프로그래밍 문제를 직접 제시하고 팀원들과 함께 풀어보는 방식으로 소모임을 운영하였습니다. C/C++ 기반 IoT 코드 디버깅 및 최적화 역량을 함께 키웠습니다.
+        </p>
+        <div class="tech-stack">
+          <span class="badge badge-purple">C/C++</span>
+          <span class="badge badge-cyan">Arduino</span>
+          <span class="badge badge-pink">Wi-Fi 프로토콜</span>
+          <span class="badge badge-purple">디버깅</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <div class="project-category">Digital Forensics</div>
+            <div class="project-title">디지털 포렌식 — 디스크 이미지 분석</div>
+          </div>
+        </div>
+        <p class="project-desc">
+          초기 디스크 이미지와 다양한 작업 수행 후의 디스크를 비교 분석하였습니다. Autopsy 도구를 활용하여 웹 브라우징 기록(YouTube, Naver 접속 이력), 쿠키, 히스토리, 파일 생성 시간 등의 디지털 증거가 어떻게 기록·보존되는지 분석 시나리오를 수행했습니다.
+        </p>
+        <div class="tech-stack">
+          <span class="badge badge-pink">Autopsy</span>
+          <span class="badge badge-cyan">Disk Imaging</span>
+          <span class="badge badge-purple">포렌식 분석</span>
+          <span class="badge badge-pink">Windows 포렌식</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-header">
+          <div>
+            <div class="project-category">Research Paper · KCI</div>
+            <div class="project-title">고효율 고신뢰 펌웨어의 최적화된 퍼징을 위한 이벤트 데이터 레코딩 기법</div>
+          </div>
+        </div>
+        <p class="project-desc">
+          EDR(Event Data Recording) 기법을 활용해 펌웨어 퍼징 과정에서 크래시를 유발했던 입력 값을 기록하고, 패치 검증 시 재활용하여 퍼징 효율을 높이는 방법론을 연구했습니다. XiaoGangZhu, Stanislav Abaimov, Jisoo Jang 등의 선행연구를 분석하고 이를 발전시킨 KCI 등재 논문입니다.
+        </p>
+        <div class="tech-stack">
+          <span class="badge badge-purple">Firmware Fuzzing</span>
+          <span class="badge badge-cyan">EDR 기법</span>
+          <span class="badge badge-pink">취약점 분석</span>
+          <span class="badge badge-purple">KCI 논문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="container">
+    <p class="section-label reveal">Academic Curriculum</p>
+    <h2 class="section-title reveal">교과 <span>활동</span></h2>
+
+    <div class="course-grid reveal">
+      <div class="course-item"><span class="course-num">01</span> 기초회로 실험</div>
+      <div class="course-item"><span class="course-num">02</span> IoT 기초실험</div>
+      <div class="course-item"><span class="course-num">03</span> 스마트시스템 기초</div>
+      <div class="course-item"><span class="course-num">04</span> 웹프로그래밍</div>
+      <div class="course-item"><span class="course-num">05</span> JAVA 프로그래밍</div>
+      <div class="course-item"><span class="course-num">06</span> 데이터베이스 이론 및 실습</div>
+      <div class="course-item"><span class="course-num">07</span> IoT 보안프로그래밍</div>
+      <div class="course-item"><span class="course-num">08</span> 데이터통신</div>
+      <div class="course-item"><span class="course-num">09</span> 빅데이터를 위한 파이썬</div>
+      <div class="course-item"><span class="course-num">10</span> 유닉스 프로그래밍</div>
+      <div class="course-item"><span class="course-num">11</span> C언어 프로그래밍</div>
+      <div class="course-item"><span class="course-num">12</span> 파이썬 프로그래밍</div>
+      <div class="course-item"><span class="course-num">13</span> 디지털 포렌식스</div>
+      <div class="course-item"><span class="course-num">14</span> 시스템 보안 이론 및 실습</div>
+      <div class="course-item"><span class="course-num">15</span> IT트렌드의 이해</div>
+      <div class="course-item"><span class="course-num">16</span> 포스트휴먼시대와 인간</div>
+      <div class="course-item"><span class="course-num">17</span> 대학수학</div>
+      <div class="course-item"><span class="course-num">18</span> 대학일본어</div>
+      <div class="course-item"><span class="course-num">19</span> 글로벌회화 기초 (일본어)</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SWOT -->
+<section id="swot">
+  <div class="container">
+    <p class="section-label reveal">Self Analysis</p>
+    <h2 class="section-title reveal">나의 <span>SWOT 분석</span></h2>
+
+    <div class="swot-grid">
+      <div class="swot-card swot-s reveal">
+        <div class="swot-label">Strength · 강점</div>
+        <div class="swot-title">강점</div>
+        <ul>
+          <li>현실적으로 생각하며 판단하는 능력</li>
+          <li>새로운 것에 도전하는 것을 두려워하지 않음</li>
+          <li>일찍 전역하여 사회생활 경험이 풍부함</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-w reveal">
+        <div class="swot-label">Weakness · 약점</div>
+        <div class="swot-title">약점</div>
+        <ul>
+          <li>시작 후 끝맺음이 미숙한 경우가 있음</li>
+          <li>보유한 자격증이 없음</li>
+          <li>순간 집중력이 다소 낮음</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-o reveal">
+        <div class="swot-label">Opportunity · 기회</div>
+        <div class="swot-title">기회</div>
+        <ul>
+          <li>아르바이트를 통해 다양한 경험 축적</li>
+          <li>다양한 대외활동 및 교내활동 활용 가능</li>
+          <li>대학생 신분으로 다양한 프로그램 접근 가능</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-t reveal">
+        <div class="swot-label">Threat · 위협</div>
+        <div class="swot-title">위협</div>
+        <ul>
+          <li>아르바이트로 인한 자기 투자 시간 부족</li>
+          <li>국내 취업 환경이 어려움</li>
+          <li>경력직 등 실력이 뛰어난 지원자와의 경쟁</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="container">
+    <p class="section-label reveal">Dream & Vision</p>
+    <h2 class="section-title reveal">나의 <span>꿈과 비전</span></h2>
+
+    <div class="vision-inner reveal">
+      <p class="vision-quote">
+        최고의 <span>보안 솔루션 개발 역량</span>을 통해<br>
+        안전하고 신뢰할 수 있는 <span>디지털 환경</span>을 구축하여<br>
+        모두가 안심하고 미래를 누리는 데<br>
+        <span>기여하는 것</span>이 나의 비전입니다.
+      </p>
+
+      <div style="margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <span class="badge badge-purple" style="font-size:0.9rem; padding: 0.6rem 1.4rem;">🔒 안전한 디지털 세상</span>
+        <span class="badge badge-cyan" style="font-size:0.9rem; padding: 0.6rem 1.4rem;">💡 보안 솔루션 개발</span>
+        <span class="badge badge-pink" style="font-size:0.9rem; padding: 0.6rem 1.4rem;">🌐 디지털 환경 구축</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-name">한동임</div>
+    <p>CYBERSECURITY · IOT · DIGITAL FORENSICS</p>
+    <p style="margin-top:0.3rem; color: rgba(136,136,170,0.5);">백석대학교 · 2025</p>
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled / max * 100) + '%';
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
