@@ -1,4 +1,4 @@
-# 🌐 Han DongIm's Personal Portfolio
+# 🌐 Han DongIm's Portfolio
 
 > 웹 포트폴리오 웹사이트입니다.
 > 사용자 중심의 UI/UX와 직관적인 정보 전달에 중점을 두고 제작되었습니다.
