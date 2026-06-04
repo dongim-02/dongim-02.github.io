@@ -1,6 +1,6 @@
 # 🌐 Han DongIm's Personal Portfolio
 
-> 응용 소프트웨어 개발자 한동임의 웹 포트폴리오 웹사이트입니다.
+> 웹 포트폴리오 웹사이트입니다.
 > 사용자 중심의 UI/UX와 직관적인 정보 전달에 중점을 두고 제작되었습니다.
 
 🔗 **Live Demo:** [https://dongim-02.github.io](https://dongim-02.github.io)
