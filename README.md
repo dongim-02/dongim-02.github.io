@@ -1,4 +1,4 @@
-> 개인 포트폴리오 웹사이트입니다.
+## 개인 포트폴리오 웹사이트입니다.
 
 🔗 **Live Demo:** [https://dongim-02.github.io](https://dongim-02.github.io)
 
